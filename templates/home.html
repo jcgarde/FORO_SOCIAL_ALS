@@ -1,0 +1,27 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+
+<h2 style="text-align: center">Bienvenid@, {{ nickname }}</h2>
+
+{% if posts.count() > 0 %}
+    {% for post in posts %}
+        <div>
+        {% include "entrada_post.html" %}
+        <p style="margin-top: 10px; margin-bottom: 30px; text-align: center">
+        {% if post.autor == usr.nickname() %}
+        <a href="/posts/elimina?id={{ post.key.urlsafe() }}"><img src="images/delete.svg" title="Delete Post" height="40" width="40" style="margin-right: 10px"></a>
+
+        {% endif %}
+        <a href="/comentarios/ver?post={{ post.key.urlsafe() }}"><img src="images/ver.svg" title="Ver Post" height="40" width="40" style="margin-left: 10px"></a></p>
+        </div>
+        <hr style="width:50%;text-align:center">
+    {% endfor %}
+{% else %}
+    <p style="text-align: center"><h2><b>Aún no hay posts creados</b></h2></p>
+{% endif %}
+    <p style="text-align: center; margin-top: 80px; margin-bottom: 80px">
+    <a href="/posts/nuevo"><button style="background-color: #4CAF50;height: 40px;width: 80px;margin-bottom: 25px; margin-right: 40px; border-radius: 20px"><b>Nuevo Post</b></button></a>
+    <a href="/"><button style="background-color: #008CBA;height: 40px;width: 80px;margin-bottom: 25px; margin-left: 40px; border-radius: 20px"><b>Volver Atrás</b></button></a>
+    </p>
+{% endblock %}

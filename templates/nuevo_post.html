@@ -1,0 +1,58 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+<h1 style="text-align: center; margin-top: 80px">Nuevo Post</h1>
+<form id="frmNuevoPost"
+      method="post"
+      action="/posts/nuevo" style="border-style: inset; border-width: 100px"
+      onsubmit="return check()">
+
+    <p style="text-align: center; margin-top: 40px">
+    <h2 style="text-align: center"><label for="edAutor">Autor</label></h2>
+    </p>
+
+    <p style="text-align: center">
+    <input type="text" id="edAutor" name="edAutor"
+           value={{usr.nickname()}} readonly/>
+    </p>
+
+    <p style="text-align: center; margin-top: 30px">
+    <h2 style="text-align: center"><label for="edTitulo">Titulo</label></h2>
+    </p>
+
+    <p style="text-align: center">
+    <input type="text" id="edTitulo" name="edTitulo"
+           placeholder="Título del post"/>
+    </p>
+
+
+    <p style="text-align: center; margin-top: 30px">
+    <h2 style="text-align: center"><label for="edContenido" style="top: 20%">Contenido</label></h2>
+    </p>
+
+    <p style="text-align: center">
+    <textarea id="edContenido" name="edContenido" rows="6" cols="80">
+    </textarea>
+    </p>
+
+    <p style="text-align: center">
+        <input type="submit" value="Crear Post" style="background-color: #4CAF50;height: 40px;width: 80px;margin-bottom: 25px; border-radius: 20px; font-weight: bold"/>
+        <a href="/home"><button style="background-color: #008CBA;height: 40px;width: 80px;margin-bottom: 25px; margin-left: 40px; border-radius: 20px" onclick="redirect()"><b>Volver</b></button></a>
+    </p>
+</form>
+
+<script>
+    function check()
+    {
+        const edAutor = document.getElementById("edAutor");
+        const edTitulo = document.getElementById("edTitulo");
+        const edContenido = document.getElementById("edContenido");
+
+        return ( edAutor.value.trim().length > 0
+            && edTitulo.value.trim().length > 0 && edContenido.value.trim().length > 0)
+    }
+    function redirect(){
+        window.location.href = "/home";
+    }
+</script>
+{% endblock %}

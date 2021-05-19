@@ -1,0 +1,32 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+<div style="text-align: center">
+<h1>{{post.titulo}},</h1><h2> de: {{post.autor}}</h2>
+<textarea readonly id="postCont" name="postCont" rows="6" cols="80">
+{{ post.contenido }}
+</textarea>
+</div>
+<hr style="width:75%;text-align:center">
+{% if comentarios.count() > 0 %}
+    {% for comentario in comentarios %}
+    {% if comentario.clave_post.urlsafe() == post.key.urlsafe() %}
+        <div style="text-align: center; margin-top: 25px; margin-bottom: 50px">
+        {% include "entrada_comentario.html" %}
+        {% if comentario.autor == usr.nickname() %}
+        <a href="/comentarios/elimina?id={{ comentario.key.urlsafe() }}"><img src="/images/delete.svg" title="Borrar Comentario" height="40" width="40" style="margin-right: 10px"></a>
+        <a href="/comentarios/modifica?id={{ comentario.key.urlsafe() }}"><img src="/images/edit.svg" title="Modificar Comentario" height="40" width="40" style="margin-left: 10px"></a>
+        {% endif %}
+        </div>
+    {% endif %}
+    {% endfor %}
+
+{% else %}
+    <p><b>Actualmente no hay ningún comentario.</b></p>
+{% endif %}
+
+<p style="text-align: center; margin-top: 40px">
+<a href="/comentarios/nuevo?post={{ post.key.urlsafe() }}"><button style="background-color: #4CAF50;height: 40px;width: 80px;margin-bottom: 25px; margin-right: 40px; border-radius: 10px; font-size: x-small"><b>Nuevo Comentario</b></button></a>
+<a href="/home"><button style="background-color: #008CBA;height: 40px;width: 80px;margin-bottom: 25px; margin-left: 40px; border-radius: 10px"><b>Volver Atrás</b></button></a>
+</p>
+{% endblock %}

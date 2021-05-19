@@ -1,0 +1,21 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+<style>
+        h1, h2, h3   {text-align: center}
+        p    {text-align: center}
+</style>
+{% if usr %}
+    <p style="margin-top: 60px; margin-bottom: 30px"><img src="images/welcome.jpeg" alt="Imagen Bienvenida"></p>
+    <p><a href="/home"><button style="background-color: #4CAF50;height: 50px;width: 125px;margin-bottom: 20px; margin-top: 30px"><b>Acceder al foro</b></button></a></p>
+    <p><a href="{{ url_usr }}"><button style="background-color: #f44336;height: 50px;width: 125px;margin-bottom: 50px"><b>Logout</b></button></a></p>
+
+
+    {% else %}
+    <p style="margin-top: 40px"><h1>Te damos la bienvenid@</h1></p>
+    <p style="margin-top: 30px; margin-bottom: 30px"><img src="images/foro.jpg" alt="Imagen Foro" width="750" height="500"></p>
+    <p style="margin-top: 50px"><h2>Haz login con un email para poder acceder al <b>foro</b>.</h2></p>
+    <p><a href="{{ url_usr }}"><button style="background-color: #008CBA;height: 50px;width: 125px;margin-bottom: 50px"><b>Login</b></button></a></p>
+{% endif %}
+
+{% endblock %}
